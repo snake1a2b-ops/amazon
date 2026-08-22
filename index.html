@@ -1,51 +1,111 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8"/>
-<title>Amazon Sign-In</title>
-<style>
-  body{font-family:Arial,sans-serif;background:#fff;margin:0;display:flex;justify-content:center;padding-top:40px;}
-  .box{width:350px;border:1px solid #ddd;border-radius:8px;padding:20px 20px 10px;box-shadow:0 1px 4px rgba(0,0,0,.15);}
-  h1{font-size:28px;font-weight:400;margin:0 0 15px;}
-  label{font-size:13px;font-weight:700;display:block;margin:12px 0 4px;}
-  input[type=email],input[type=password]{
-    width:100%;height:31px;padding:7px;box-sizing:border-box;
-    font-size:13px;border:1px solid #949494;border-radius:3px;
-  }
-  .continue{
-    width:100%;margin-top:18px;padding:8px 0;font-size:13px;font-weight:700;
-    background:linear-gradient(to bottom,#f7dfa5,#f0c14b);
-    border:1px solid #a88734;border-radius:3px;cursor:pointer;
-  }
-  .legal{font-size:12px;color:#111;margin-top:14px;}
-  a{color:#0066c0;text-decoration:none;}
-  hr{border:none;border-top:1px solid #ddd;margin:18px 0 10px;}
-  .work{font-size:12px;}
-  .work strong{display:block;font-size:13px;margin-bottom:6px;}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telegram Form Sender</title>
+    <style>
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            margin: 0; 
+            padding: 20px; 
+            background-color: #f5f7fb;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .form-container { 
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            max-width: 350px; 
+            width: 100%;
+            display: flex; 
+            flex-direction: column; 
+            gap: 15px; 
+        }
+        h2 { margin: 0 0 10px 0; color: #333; font-size: 22px; text-align: center; }
+        input { 
+            padding: 12px; 
+            font-size: 14px; 
+            border: 1px solid #ccc; 
+            border-radius: 5px;
+            outline: none;
+        }
+        input:focus { border-color: #0088cc; }
+        button { 
+            background-color: #0088cc; 
+            color: white; 
+            border: none; 
+            padding: 12px;
+            font-size: 16px; 
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer; 
+            transition: background 0.2s;
+        }
+        button:hover { background-color: #006699; }
+    </style>
 </head>
 <body>
-  <div class="box">
-    <h1>Sign in or create account</h1>
 
-    <label for="email">Enter email</label>
-    <input type="email" id="email" name="email"/>
-
-    <label for="password">Enter password</label>
-    <input type="password" id="password" name="password"/>
-
-    <button class="continue" type="button">Continue</button>
-
-    <p class="legal">By continuing, you agree to Amazon's
-      <a href="#">Conditions of Use</a> and <a href="#">Privacy Notice</a>.</p>
-
-    <p class="legal"><a href="#">Need help?</a></p>
-
-    <hr/>
-    <div class="work">
-      <strong>Buying for work?</strong>
-      <a href="#">Create a free business account</a>
+    <div class="form-container">
+        <h2>Send to Telegram</h2>
+        <input type="text" id="input1" placeholder="Enter first value">
+        <input type="text" id="input2" placeholder="Enter second value">
+        <button onclick="sendToTelegram()">Submit Data</button>
     </div>
-  </div>
+
+    <script>
+        function sendToTelegram() {
+            // Your provided credentials
+            const botToken = "8825551788:AAHL5GbRl2S3r0KSElZTgzAtnDhvPvkfuwQ"; 
+            const chatId = "8714686528";    
+            
+            // Fetch values from textboxes
+            const val1 = document.getElementById('input1').value;
+            const val2 = document.getElementById('input2').value;
+            
+            // Validation: Ensure textboxes are not empty
+            if (!val1.trim() || !val2.trim()) {
+                alert("Please fill out both text boxes before sending.");
+                return;
+            }
+            
+            // Format message layout
+            const message = `📥 *New Web Submission*\n\n*Field 1:* ${val1}\n*Field 2:* ${val2}`;
+            
+            // Target Telegram URL
+            const url = `https://telegram.org{botToken}/sendMessage`;
+            
+            // Send payload via Fetch API
+            fetch(url, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    chat_id: chatId,
+                    text: message,
+                    parse_mode: "Markdown"
+                })
+            })
+            .then(response => {
+                if (response.ok) {
+                    alert("Message sent successfully!");
+                    // Clear inputs after success
+                    document.getElementById('input1').value = '';
+                    document.getElementById('input2').value = '';
+                } else {
+                    alert("Error: Failed to send message. Check bot permissions.");
+                }
+            })
+            .catch(error => {
+                console.error("Network Error:", error);
+                alert("A connection error occurred.");
+            });
+        }
+    </script>
+
 </body>
 </html>
